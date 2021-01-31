@@ -23,45 +23,11 @@ namespace HUnity.SimpleExample
         /// </summary>
         void Update()
         {
-            var moveDirection = _rigidbody.velocity;
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                moveDirection.x = 1;
-            }
-            else if(Input.GetKeyUp(KeyCode.D))
-            {
-                moveDirection.x = 0;
-            }
-            
-            if(Input.GetKey(KeyCode.A))
-            {
-                moveDirection.x = -1;
-            }
-            else if(Input.GetKeyUp(KeyCode.A))
-            {
-                moveDirection.x = 0;
-            }
-
-            if(Input.GetKey(KeyCode.W))
-            {
-                moveDirection.z = 1;
-            }
-            else if(Input.GetKeyUp(KeyCode.W))
-            {
-                moveDirection.z = 1;
-            }
-
-            if(Input.GetKey(KeyCode.S))
-            {
-                moveDirection.z = -1;
-            }
-            else if(Input.GetKeyUp(KeyCode.S))
-            {
-                moveDirection.z = 0;
-            }
-
-            _rigidbody.velocity = moveDirection;
+            _rigidbody.velocity = _rigidbody.velocity
+                .ControlSpeedByKey(KeyCode.D, SpeedDirection.x, 1)
+                .ControlSpeedByKey(KeyCode.A, SpeedDirection.x, -1)
+                .ControlSpeedByKey(KeyCode.W, SpeedDirection.z, 1)
+                .ControlSpeedByKey(KeyCode.S, SpeedDirection.z, -1);
         }
     }
 }
